@@ -1,8 +1,35 @@
 
 import java.util.Scanner;
 
+class SiyasiException extends Exception{
 
-public class yolcu implements YurtDisiKurallari{
+    @Override
+    public void printStackTrace() {
+        System.out.println("Siyasi Yasaginiz Bulunuyor...");
+    }
+     
+}
+
+class VizeException extends Exception{
+
+    @Override
+    public void printStackTrace() {
+        System.out.println("Gideceginiz Ulkeye Vizeniz Bulunmamaktadir...");
+    }
+     
+}
+class HarcException extends Exception{
+
+    @Override
+    public void printStackTrace() {
+        System.out.println("Lutfen Yurt Disi Harcini Tam Yatiriniz...");
+    }
+    
+}
+
+public class yolcu {
+
+   
     private int harc;
     private  boolean siyasiYasak;
     private boolean vizeDurumu;
@@ -38,38 +65,35 @@ public class yolcu implements YurtDisiKurallari{
     
     }
     
-    @Override
-    public boolean yurtDisiHarciKontrol() {
+   
+    public void yurtDisiHarciKontrol() throws HarcException {
         if (this.harc<15) {
-            System.out.println("Lutfen yurt disi cikis harinizi tam yatiriniz");
-            return false;
+            throw new HarcException();
         }else{
             System.out.println("yurt disi harci islemi tamam");
-            return true;
+           
         }
        
     }
 
-    @Override
-    public boolean siyasiYasakKontrol() {
+   
+    public void siyasiYasakKontrol() throws SiyasiException {
         if (this.siyasiYasak == true) {
-            System.out.println("Siyasi yasaginiz bulunuyor yurt disina cikamazsiniz");
-            return false;
+            throw new SiyasiException();
         }else{
             System.out.println("Siyasi yasaginiz bulunmuyor...");
-            return true;
+            
         }
     }
 
-    @Override
-    public boolean vizeDurumuKontrol() {
+   
+    public void vizeDurumuKontrol() throws VizeException {
         if (this.vizeDurumu == true) {
-            System.out.println("Vize islemleri tamamlandi");
-            return true;
+            System.out.println("Vİze Islemleri Tamam.");
+           
         }
         else{
-            System.out.println("Vizeniz Gideceginiz Ulkeye Bulunmamaktadir");
-            return false;
+            throw new VizeException();            
         }
     }
             
